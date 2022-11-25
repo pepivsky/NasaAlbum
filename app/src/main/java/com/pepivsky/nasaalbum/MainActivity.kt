@@ -3,6 +3,7 @@ package com.pepivsky.nasaalbum
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -25,8 +27,15 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.pepivsky.nasaalbum.model.PhotoResponse
 import com.pepivsky.nasaalbum.ui.theme.NasaAlbumTheme
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import com.pepivsky.NasaScreen
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val viewModel: NasaScreenViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,50 +45,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    NasaScreen()
+                    NasaScreen(viewModel)
                 }
             }
         }
     }
 }
 
-@Composable
-fun NasaScreen() {
-    //Text(text = "Hello $name!")
-    Box(modifier = Modifier.fillMaxSize()) {
-        Header()
-    }
-}
-
-@Composable
-fun Header() {
-    Text(modifier = Modifier.padding(16.dp),text = "Nasa Mars Images", fontWeight = FontWeight.Bold, fontSize = 32.sp)
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun PhotosGrid() {
-    /*LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
-
-    })*/
-}
-
-@Composable
-fun ItemPhoto(photoResponse: PhotoResponse) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(photoResponse.imageUrl)
-                .crossfade(true)
-                .build(), contentDescription = "image"
-        )
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     NasaAlbumTheme {
-        NasaScreen()
+        //R.drawable.placeholder
+        //NasaScreen(viewModel = )
     }
 }
