@@ -4,7 +4,8 @@ plugins {
     // plugins for dagger
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.10'
+
+    //id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.10'
 }
 
 android {
@@ -67,12 +68,16 @@ dependencies {
 
     // coil for load images in compose
     implementation "io.coil-kt:coil-compose:2.2.2"
-    // retrofit
+    /*// retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     // Retrofit con Kotlin serialization Converter
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     // Kotlin serialization
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"*/
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 
 
