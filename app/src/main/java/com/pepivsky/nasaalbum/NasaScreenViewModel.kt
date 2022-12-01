@@ -12,6 +12,7 @@ import okio.IOException
 import javax.inject.Inject
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 
 @HiltViewModel
 class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetPhotosUseCase): ViewModel() {
@@ -21,8 +22,12 @@ class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetP
     }
 
     //live data privado, lista de objetos
-    private val _imagesResponse = MutableLiveData<List<PhotoResponse>>()
-    val imagesResponse = _imagesResponse
+    private val _imagesResponse = mutableStateListOf<PhotoResponse>()
+    val imagesResponse: List<PhotoResponse> = _imagesResponse
+
+    /*private val _task = mutableStateListOf<PhotoResponse>()
+    val task: List<PhotoResponse> = _task*/
+
 
     // liveData para saber cuando esta cargando
     /*private val _uiState = MutableLiveData<HomeUiState>(HomeUiState.Loading)
@@ -40,7 +45,7 @@ class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetP
             homeUiState = try {
                 val result = getPhotosUseCase.getPhotos()
                 Log.d("pp", "get JSON $result")
-                _imagesResponse.value = result
+                _imagesResponse.addAll(result)
                 HomeUiState.Success
             } catch (e: IOException) {
                 Log.d("pp", "error")

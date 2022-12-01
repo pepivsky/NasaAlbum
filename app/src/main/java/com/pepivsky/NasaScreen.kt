@@ -58,7 +58,7 @@ fun Header() {
 //@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PhotosGrid(viewModel: NasaScreenViewModel) {
-    val photos: List<PhotoResponse> by viewModel.imagesResponse.observeAsState(initial = emptyList<PhotoResponse>())
+    val photos: List<PhotoResponse> = viewModel.imagesResponse
     LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
         items(photos) { photo ->
 
