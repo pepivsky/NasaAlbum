@@ -25,13 +25,7 @@ class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetP
     private val _imagesResponse = mutableStateListOf<PhotoResponse>()
     val imagesResponse: List<PhotoResponse> = _imagesResponse
 
-    /*private val _task = mutableStateListOf<PhotoResponse>()
-    val task: List<PhotoResponse> = _task*/
-
-
     // liveData para saber cuando esta cargando
-    /*private val _uiState = MutableLiveData<HomeUiState>(HomeUiState.Loading)
-    val uiState = _uiState*/
     var homeUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
 
 
