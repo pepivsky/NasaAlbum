@@ -3,7 +3,9 @@ package com.pepivsky.nasaalbum
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
@@ -12,13 +14,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import coil.size.Size
-import com.pepivsky.nasaalbum.model.PhotoResponse
 
 @Composable
 fun ZoomableBox(
@@ -54,7 +53,7 @@ fun ZoomableBox(
 
 //@Preview()
 @Composable
-fun ImageWithZoom(photoResponse: PhotoResponse) {
+fun ImageWithZoom(photoURL: String) {
     /*val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data("https://example.com/image.jpg")
@@ -62,19 +61,8 @@ fun ImageWithZoom(photoResponse: PhotoResponse) {
             .build()
     )*/
 
-    ZoomableBox {
-        /* Image(
-             modifier = Modifier
-                 .graphicsLayer(
-                     scaleX = scale,
-                     scaleY = scale,
-                     translationX = offsetX,
-                     translationY = offsetY
-                 ).fillMaxSize(),
-             painter = painterResource(R.drawable.placeholder),
-             contentDescription = null
-         )*/
 
+    ZoomableBox {
         AsyncImage(
             modifier = Modifier
                 .graphicsLayer(
@@ -82,14 +70,17 @@ fun ImageWithZoom(photoResponse: PhotoResponse) {
                     scaleY = scale,
                     translationX = offsetX,
                     translationY = offsetY
-                ).fillMaxSize(),
+                )
+                .fillMaxSize(),
             model = ImageRequest.Builder(LocalContext.current)
-                .data(R.drawable.placeholder)
+                .data(photoURL)
                 .crossfade(true)
                 .build(), contentDescription = "image",
             placeholder = painterResource(id = R.drawable.placeholder)
         )
     }
+
+
 }
 
 /*

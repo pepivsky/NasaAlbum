@@ -4,33 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import com.pepivsky.nasaalbum.model.PhotoResponse
+import androidx.navigation.NavType
 import com.pepivsky.nasaalbum.ui.theme.NasaAlbumTheme
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.pepivsky.NasaScreen
+import com.pepivsky.nasaalbum.model.Routes
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -45,7 +33,62 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    NasaScreen(viewModel)
+                    //NasaScreen(viewModel)
+
+                    val navigationController = rememberNavController()
+                    NavHost(
+                        navController = navigationController,
+                        startDestination = Routes.AlbumScreen.route
+                    ) {
+                        composable(Routes.AlbumScreen.route) { NasaScreen(viewModel = viewModel, navigationController) }
+
+                       /* composable(Routes.ImageScreen.route) {
+                            val argument = it.arguments?.getString(Routes.ImageScreen.KEY_PHOTO_URL).orEmpty()
+                            ImageWithZoom(argument)
+                        }*/
+
+                        composable(Routes.Pantalla4.route,
+                            arguments = listOf(navArgument(Routes.Pantalla4.KEY_NAME) { type = NavType.StringType })
+                            ) {
+                            val argument = it.arguments?.getString(Routes.Pantalla4.KEY_NAME)
+                            ImageWithZoom(argument.orEmpty())
+                        }
+
+                        /*
+                         composable(Routes.Pantalla4.route) {
+                            val argument = it.arguments?.getString(Routes.Pantalla4.KEY_NAME)
+                            ImageWithZoom(argument.orEmpty())
+                        }
+
+                         */
+
+
+
+                        /*composable(
+                            Routes.ImageScreen.route,
+                            arguments = listOf(navArgument(Routes.ImageScreen.KEY_PHOTO) { type = NavType.P })
+
+                        ) {
+                            val argument = it.arguments?.getInt(Routes.Pantalla2.KEY_AGE) ?: 0
+                            Screen2(navigationController, argument)
+                        }
+
+                        composable(Routes.Pantalla3.route) { Screen3(navigationController) }
+
+                        // navegacion con argumento String
+                        composable(Routes.Pantalla4.route) {
+                            val argument = it.arguments?.getString(Routes.Pantalla4.KEY_NAME)
+                            Screen4(navigationController, argument.orEmpty())
+                        }
+
+                        composable(Routes.Pantalla5.route,
+                            arguments = listOf(navArgument(Routes.Pantalla5.KEY_COUNTRY, {defaultValue = "defaultCountry"}))
+                        )
+                        {
+                            Screen5(navigationController = navigationController, it.arguments?.getString(Routes.Pantalla5.KEY_COUNTRY))
+                        }*/
+
+                    }
                 }
             }
         }
