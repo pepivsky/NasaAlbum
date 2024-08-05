@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace 'com.pepivsky.nasaalbum'
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.pepivsky.nasaalbum"
         minSdk 24
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -90,6 +90,8 @@ dependencies {
     // dagger hilt
     implementation "com.google.dagger:hilt-android:2.41"
     kapt "com.google.dagger:hilt-android-compiler:2.41"
+    // ads
+    implementation ("com.google.android.gms:play-services-ads:23.0.0")
 
 
 }
