@@ -25,6 +25,7 @@ import coil.request.ImageRequest
 import com.pepivsky.nasaalbum.HomeUiState
 import com.pepivsky.nasaalbum.NasaScreenViewModel
 import com.pepivsky.nasaalbum.R
+import com.pepivsky.nasaalbum.ads.AdvertView
 import com.pepivsky.nasaalbum.model.PhotoResponse
 import com.pepivsky.nasaalbum.model.Routes
 import java.net.URLEncoder
@@ -39,8 +40,9 @@ fun NasaScreen(viewModel: NasaScreenViewModel, navigationController: NavHostCont
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
             is HomeUiState.Success -> {
-                Column(modifier = Modifier.fillMaxSize()) {
+                Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Header()
+                    AdvertView(modifier = Modifier.size(width = 320.dp, height = 50.dp))
                     PhotosGrid(viewModel, navigationController)
                 }
             }
@@ -77,7 +79,8 @@ fun ItemPhoto(photoResponse: PhotoResponse, navigationController: NavHostControl
         .padding(6.dp)
         .aspectRatio(1F)
         .clickable {
-            val encodedUrl = URLEncoder.encode(photoResponse.imageUrl, StandardCharsets.UTF_8.toString())
+            val encodedUrl =
+                URLEncoder.encode(photoResponse.imageUrl, StandardCharsets.UTF_8.toString())
             Log.d("pp", "tap! $encodedUrl")
             navigationController.navigate(Routes.Pantalla4.createRoute(encodedUrl))
         },
