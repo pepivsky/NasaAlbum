@@ -76,7 +76,7 @@ fun ImageWithZoom(photoURL: String) {
                 .data(photoURL)
                 .crossfade(true)
                 .build(), contentDescription = "image",
-            placeholder = painterResource(id = R.drawable.placeholder)
+            placeholder = painterResource(id = R.drawable.landscape_placeholder)
         )
     }
 

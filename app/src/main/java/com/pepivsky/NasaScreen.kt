@@ -94,7 +94,7 @@ fun ItemPhoto(photoResponse: PhotoResponse, navigationController: NavHostControl
                 .crossfade(true)
                 .build(), contentDescription = "image",
             contentScale = ContentScale.FillBounds,
-            placeholder = painterResource(id = R.drawable.placeholder)
+            placeholder = painterResource(id = R.drawable.landscape_placeholder)
         )
     }
 }
