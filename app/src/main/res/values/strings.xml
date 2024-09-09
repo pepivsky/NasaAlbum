@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">NasaAlbum</string>
-    <string name="ad_id_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_name">Real Photos of Mars</string>
+    <string name="ad_id_banner" translatable="false">ca-app-pub-5709283717366844/3093044808</string>
+    <string name="no_internet_label">Hubo un error\nRevisa tu conexión</string>
 </resources>

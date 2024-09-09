@@ -28,6 +28,7 @@ import com.pepivsky.nasaalbum.R
 import com.pepivsky.nasaalbum.ads.AdvertView
 import com.pepivsky.nasaalbum.model.PhotoResponse
 import com.pepivsky.nasaalbum.model.Routes
+import com.pepivsky.nasaalbum.ui.screens.ErrorScreen
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -47,7 +48,7 @@ fun NasaScreen(viewModel: NasaScreenViewModel, navigationController: NavHostCont
                 }
             }
             is HomeUiState.Error -> {
-                Text(modifier = Modifier.align(Alignment.Center), text = "Error")
+                ErrorScreen()
             }
         }
     }
