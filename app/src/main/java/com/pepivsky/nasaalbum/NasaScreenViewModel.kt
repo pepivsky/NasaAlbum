@@ -17,10 +17,6 @@ import androidx.compose.runtime.mutableStateListOf
 @HiltViewModel
 class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetPhotosUseCase): ViewModel() {
 
-    init {
-        getImages()
-    }
-
     //live data privado, lista de objetos
     private val _imagesResponse = mutableStateListOf<PhotoResponse>()
     val imagesResponse: List<PhotoResponse> = _imagesResponse
@@ -28,10 +24,15 @@ class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetP
     // liveData para saber cuando esta cargando
     var homeUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
 
+    init {
+        getImages()
+    }
+
+
 
     // get images from api
     private fun getImages() {
-       //homeUiState = HomeUiState.Loading
+       homeUiState = HomeUiState.Loading
 
         viewModelScope.launch {
             Log.d("pp", "init call")
