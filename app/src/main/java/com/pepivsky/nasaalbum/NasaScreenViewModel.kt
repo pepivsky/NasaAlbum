@@ -47,7 +47,12 @@ class NasaScreenViewModel @Inject constructor(private val getPhotosUseCase: GetP
             }
         }
     }
+
+    fun retry() {
+        getImages()
+    }
 }
+
 
 
 sealed interface HomeUiState {

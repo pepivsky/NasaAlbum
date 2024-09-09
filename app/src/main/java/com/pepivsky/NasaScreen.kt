@@ -48,7 +48,7 @@ fun NasaScreen(viewModel: NasaScreenViewModel, navigationController: NavHostCont
                 }
             }
             is HomeUiState.Error -> {
-                ErrorScreen()
+                ErrorScreen(viewModel)
             }
         }
     }
