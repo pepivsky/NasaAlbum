@@ -40,18 +40,24 @@ fun NasaScreen(viewModel: NasaScreenViewModel, navigationController: NavHostCont
             is HomeUiState.Loading -> {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
+
             is HomeUiState.Success -> {
-                Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Header()
-                    AdvertView(modifier = Modifier
-                        .padding(bottom = 24.dp)
-                        .height(60.dp)
+                    AdvertView(
+                        modifier = Modifier
+                            .padding(bottom = 24.dp)
+                            .height(60.dp)
                     )
 
 
                     PhotosGrid(viewModel, navigationController)
                 }
             }
+
             is HomeUiState.Error -> {
                 ErrorScreen(viewModel)
             }
@@ -61,7 +67,12 @@ fun NasaScreen(viewModel: NasaScreenViewModel, navigationController: NavHostCont
 
 @Composable
 fun Header() {
-    Text(modifier = Modifier.padding(16.dp),text = "Nasa Mars Images", fontWeight = FontWeight.Bold, fontSize = 32.sp)
+    Text(
+        modifier = Modifier.padding(16.dp),
+        text = "Nasa Mars Images",
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp
+    )
 }
 
 //@OptIn(ExperimentalFoundationApi::class)
@@ -80,16 +91,17 @@ fun PhotosGrid(viewModel: NasaScreenViewModel, navigationController: NavHostCont
 
 @Composable
 fun ItemPhoto(photoResponse: PhotoResponse, navigationController: NavHostController) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .padding(6.dp)
-        .aspectRatio(1F)
-        .clickable {
-            val encodedUrl =
-                URLEncoder.encode(photoResponse.imageUrl, StandardCharsets.UTF_8.toString())
-            Log.d("pp", "tap! $encodedUrl")
-            navigationController.navigate(Routes.Pantalla4.createRoute(encodedUrl))
-        },
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(6.dp)
+            .aspectRatio(1F)
+            .clickable {
+                val encodedUrl =
+                    URLEncoder.encode(photoResponse.imageUrl, StandardCharsets.UTF_8.toString())
+                Log.d("pp", "tap! $encodedUrl")
+                navigationController.navigate(Routes.Pantalla4.createRoute(encodedUrl))
+            },
         elevation = 8.dp,
         shape = RoundedCornerShape(20.dp)
     ) {
@@ -103,38 +115,3 @@ fun ItemPhoto(photoResponse: PhotoResponse, navigationController: NavHostControl
         )
     }
 }
-
-/*
-@Preview()
-@Composable
-fun ZoomableImage() {
-    val scale = remember { mutableStateOf(1f) }
-    val rotationState = remember { mutableStateOf(1f) }
-    Box(
-        modifier = Modifier
-            .clip(RectangleShape) // Clip the box content
-            .fillMaxSize() // Give the size you want...
-            .background(Color.Gray)
-            .pointerInput(Unit) {
-                detectTransformGestures { centroid, pan, zoom, rotation ->
-                    scale.value *= zoom
-                    rotationState.value += rotation
-                }
-            }
-    ) {
-        Image(
-            modifier = Modifier
-                .align(Alignment.Center) // keep the image centralized into the Box
-                .graphicsLayer(
-                    // adding some zoom limits (min 50%, max 200%)
-                    scaleX = maxOf(.5f, minOf(3f, scale.value)),
-                    scaleY = maxOf(.5f, minOf(3f, scale.value)),
-                    rotationZ = rotationState.value
-                ),
-            contentDescription = null,
-            painter = painterResource(R.drawable.placeholder)
-        )
-    }
-}*/
-
-
