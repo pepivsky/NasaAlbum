@@ -43,7 +43,12 @@ fun NasaScreen(viewModel: NasaScreenViewModel, navigationController: NavHostCont
             is HomeUiState.Success -> {
                 Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Header()
-                    AdvertView(modifier = Modifier.size(width = 320.dp, height = 60.dp).padding(bottom = 24.dp))
+                    AdvertView(modifier = Modifier
+                        .padding(bottom = 24.dp)
+                        .height(60.dp)
+                    )
+
+
                     PhotosGrid(viewModel, navigationController)
                 }
             }
